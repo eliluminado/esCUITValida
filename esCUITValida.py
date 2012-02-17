@@ -25,19 +25,19 @@ def esCUITValida(cuit):
     """
     # Convertimos el valor a una cadena
     cuit = str(cuit)
-    # Aca se ve si es de la forma de 13 caracteres
-    #   con los guiones
-    if len(cuit) == 13 and cuit[2] == '-' and cuit[11] == '-':
-        # Removemos los guiones para trabajar
-        cuit = cuit.replace('-', '')
+    # Aca removemos guiones, espacios y puntos para poder trabajar
+    cuit = cuit.replace("-", "") # Borramos los guiones
+    cuit = cuit.replace(" ", "") # Borramos los espacios
+    cuit = cuit.replace(".", "") # Borramos los puntos
     # Si no tiene 11 caracteres lo descartamos
-    elif len(cuit) != 11:
+    if len(cuit) != 11:
         return False, cuit
     # Solo resta analizar si todos los caracteres son numeros
     if not cuit.isdigit():
         return False, cuit
     # Despues de estas validaciones podemos afirmar
     #   que contamos con 11 numeros
+    # Aca comienza la magia
     base = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2]
     aux = 0
     for i in xrange(10):
